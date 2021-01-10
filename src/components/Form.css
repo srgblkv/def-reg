@@ -1,0 +1,66 @@
+.input-partNumber {
+  font-size: 40px;
+  width: 100%;
+  border-bottom: 2px solid black;
+  margin-bottom: 10px;
+
+  display: flex;
+  align-items: center;
+}
+
+.input-partNumber span {
+  text-align: right;
+  width: 30%;
+}
+
+.input-partNumber input {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 40px;
+  text-align: center;
+  border: none;
+  margin: auto;
+  width: 60%;
+}
+
+.input-partNumber input:focus {
+  outline: none;
+}
+
+.input-key {
+  margin: auto;
+  width: 250px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.input-key .key {
+  display: flex;
+  justify-content: center;
+  width: 30%;
+}
+
+.key button {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  margin: 5px;
+  line-height: 60px;
+  border: 1px solid black;
+  border-radius: 20%;
+  height: 60px;
+  width: 60px;
+
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.key button:hover,
+.key button:focus,
+.key button:active {
+  opacity: 1;
+  transition: all 0.5s ease;
+  outline: none;
+}
