@@ -14,7 +14,13 @@
 }
 
 fieldset {
-  line-height: 40px;
+  line-height: 20px;
   display: flex;
   justify-content: space-between;
+}
+
+textarea {
+  width: 100%;
+  text-align: left;
+  padding: 10px;
 }

@@ -3,22 +3,26 @@ import { Link } from "react-router-dom";
 
 import "./style.css";
 
-const Sets = ({ fb, partNumber, setPartNumber }) => {
+const Sets = ({ fb, partNumber, setPartNumber, setPrevPartNumber }) => {
   const [count, setCount] = useState(1);
   const [type, setType] = useState("");
   const [defect, setDefect] = useState("");
+  const [form, setForm] = useState("");
+  const [comment, setComment] = useState("");
 
-  const addPart = (partNumber, type, defect, count) => {
+  const addPart = (partNumber, type, defect, count, form) => {
     const date = new Date();
 
-    console.log({
-      [date]: {
-        partNumber,
-        type,
-        defect,
-        count
-      }
-    });
+    // console.log({
+    //   [date]: {
+    //     partNumber,
+    //     type,
+    //     defect,
+    //     form,
+    //     count,
+    //     comment: comment.split(' ')
+    //   }
+    // });
 
     fb.database()
       .ref("parts/" + date)
@@ -26,12 +30,16 @@ const Sets = ({ fb, partNumber, setPartNumber }) => {
         partNumber,
         type,
         defect,
-        count
+        form,
+        count,
+        comment: comment.split(" ")
       });
   };
 
   const handleSubmit = () => {
-    addPart(partNumber, type, defect, count);
+    addPart(partNumber, type, defect, count, form, comment);
+    setComment("");
+    setPrevPartNumber(partNumber);
     setPartNumber("");
   };
 
@@ -92,6 +100,59 @@ const Sets = ({ fb, partNumber, setPartNumber }) => {
           />
         </label>
       </fieldset>
+
+      <fieldset>
+        <legend>Форма</legend>
+        <label htmlFor="formType-sylkast">
+          <input
+            onChange={(e) => {
+              setForm(e.target.value);
+            }}
+            type="radio"
+            id="formType-sylkast"
+            name="formType"
+            value="formType-sylkast"
+          />
+          С
+        </label>
+        <label htmlFor="formType-springs">
+          <input
+            onChange={(e) => {
+              setForm(e.target.value);
+            }}
+            type="radio"
+            id="formType-springs"
+            name="formType"
+            value="formType-springs"
+          />
+          Р
+        </label>
+        <label htmlFor="formType-sixforms">
+          <input
+            onChange={(e) => {
+              setForm(e.target.value);
+            }}
+            type="radio"
+            id="formType-sixforms"
+            name="formType"
+            value="formType-sixforms"
+          />
+          Ш
+        </label>
+        <label htmlFor="formType-ptfe">
+          <input
+            onChange={(e) => {
+              setForm(e.target.value);
+            }}
+            type="radio"
+            id="formType-ptfe"
+            name="formType"
+            value="formType-ptfe"
+          />
+          Ф
+        </label>
+      </fieldset>
+
       <fieldset className="count">
         <legend>Количество</legend>
         <button
@@ -112,8 +173,20 @@ const Sets = ({ fb, partNumber, setPartNumber }) => {
           +
         </button>
       </fieldset>
+      <fieldset>
+        <legend>Комментарий</legend>
+        <textarea
+          onChange={(e) => {
+            setComment(e.target.value);
+          }}
+          value={comment}
+        >
+          {" "}
+        </textarea>
+      </fieldset>
+
       <Link to="/">
-        <button onClick={handleSubmit} disabled={!(type && defect)}>
+        <button onClick={handleSubmit} disabled={!(type && defect && form)}>
           Записать
         </button>
       </Link>

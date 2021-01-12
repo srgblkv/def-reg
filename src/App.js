@@ -8,6 +8,7 @@ import Sets from "./pages/Sets";
 
 export default function App({ fb }) {
   const [partNumber, setPartNumber] = useState("");
+  const [prevPartNumber, setPrevPartNumber] = useState("");
 
   const keyClick = (e) => {
     const { value } = e.target;
@@ -29,10 +30,16 @@ export default function App({ fb }) {
     <div className="App">
       <Switch>
         <Route exact path="/">
+          {prevPartNumber ? `прошлая запись: ${prevPartNumber}` : ``}
           <Main partNumber={partNumber} keyClick={keyClick} />
         </Route>
         <Route path="/select-defect">
-          <Sets fb={fb} setPartNumber={setPartNumber} partNumber={partNumber} />
+          <Sets
+            fb={fb}
+            setPartNumber={setPartNumber}
+            partNumber={partNumber}
+            setPrevPartNumber={setPrevPartNumber}
+          />
         </Route>
       </Switch>
     </div>
